@@ -10,6 +10,7 @@ class TelegramParserScheduler:
     HOUR = 60 * MINUTE
     DAY = 24 * HOUR
     WEEK = 7 * DAY
+    TIMES_TO_CHECK_IN_ONE_PERIOD = 10
 
     def __init__(self, period_in_seconds: int, parser: TelegramChatParser) -> None:
         self._period_in_seconds = period_in_seconds
@@ -18,7 +19,7 @@ class TelegramParserScheduler:
 
     def run_parser(self):
 
-        INTERVAL_IN_SECONDS = self.HOUR
+        INTERVAL_IN_SECONDS = self._period_in_seconds // self.TIMES_TO_CHECK_IN_ONE_PERIOD
 
         while True:
             if self.current_time >= self._next_time_to_parse:
