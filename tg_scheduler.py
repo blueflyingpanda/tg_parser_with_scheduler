@@ -25,7 +25,7 @@ class TelegramParserScheduler:
             if self.current_time >= self._next_time_to_parse:
                 self._next_time_to_parse = self.current_time + self._period_in_seconds
                 self._parser.parse(self._period_in_seconds)
-                self._parser.save()
+                self._parser.save(interval=self._period_in_seconds)
             sleep(INTERVAL_IN_SECONDS)
 
     @property

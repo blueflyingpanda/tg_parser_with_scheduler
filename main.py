@@ -17,7 +17,9 @@ if __name__ == "__main__":
 
     chat_parser = TelegramChatParserToCsvStatistics(app_info, CHAT_NAME,
                                                     keywords=kw_parser.keywords,
-                                                    table_path="chat_data.csv")
+                                                    table_path="chat_data.csv",
+                                                    json_path="chat_data.json"
+                                                    )
 
     scheduler = TelegramParserScheduler(TelegramParserScheduler.DAY, chat_parser)
     scheduler.run_parser()
