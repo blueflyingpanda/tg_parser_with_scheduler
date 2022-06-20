@@ -94,9 +94,12 @@ class TelegramChatParserToCsvStatistics(TelegramChatParser):
         last_msg_time_in_seconds = None
         current_time_in_seconds = time()
 
+        for chat in self._client.iter_dialogs():  # ISSUE doesn't find required chat without it
+            print(chat.name)
+
         for keyword in self.keywords:
+            offset = 0
             while not last_msg_time_in_seconds or last_msg_time_in_seconds > current_time_in_seconds - period_in_seconds:
-                offset = 0
                 for message in self._client.iter_messages(self._chat_name, limit=LIMIT, search=keyword, offset_id=offset):
                     if message.sender.id in self._statistics:
                         self._statistics[message.sender.id]["points"] += 1
@@ -105,9 +108,13 @@ class TelegramChatParserToCsvStatistics(TelegramChatParser):
                     self._messages.append(
                         TelegramMessageInfo(sender=message.sender, text=message.text, _id = message.id, date = datetime.timestamp(message.date))
                         )
+                    print(self._statistics)
                 last_message = self._messages[-1]
+                previous_offset = offset
                 offset = last_message._id
                 last_msg_time_in_seconds = last_message.date
+                if previous_offset == offset:
+                    break
 
     def save(self):
         file_is_empty = False
