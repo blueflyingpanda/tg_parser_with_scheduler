@@ -1,0 +1,5 @@
+venv
+.idea
+tg_id_and_hash.json
+session.session
+chat_data.csv
