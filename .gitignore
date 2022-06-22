@@ -3,5 +3,6 @@ venv
 tg_id_and_hash.json
 session.session
 chat_data.*
-keywords.txt
 session.session-journal
+app.log
+__pycache__

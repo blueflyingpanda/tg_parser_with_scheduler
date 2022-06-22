@@ -13,7 +13,7 @@ class KeywordsParser(ABC):
 
 class KeywordsParserFromTxt(KeywordsParser):
 
-    def read_keywords(self, keywords_file: Path):
+    def read_keywords(self, keywords_file: str):
         with open(keywords_file) as file:
             for line in file:
                 self.keywords.add(line.strip())
