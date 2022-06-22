@@ -144,3 +144,4 @@ class TelegramChatParserToCsvStatistics(TelegramChatParser):
                 chat_data["last_update_time"] = time()
                 dump(chat_data, file)
         self._statistics.clear()
+        self._messages.clear()
