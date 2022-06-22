@@ -1,5 +1,6 @@
 from time import sleep, time
 from tg_parser import TelegramChatParser
+import logging
 
 class TelegramParserScheduler:
 
@@ -23,6 +24,7 @@ class TelegramParserScheduler:
 
         while True:
             if self.current_time >= self._next_time_to_parse:
+                logging.info("start parser")
                 self._next_time_to_parse = self.current_time + self._period_in_seconds
                 self._parser.parse(self._period_in_seconds)
                 self._parser.save(interval=self._period_in_seconds)
